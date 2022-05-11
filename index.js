@@ -25,10 +25,12 @@ app.use(express.json());
 const dishRouter = require('./routes/dishRouter');
 const promoRouter = require('./routes/promoRouter');
 const leaderRouter = require('./routes/leaderRouter');
+const userRouter = require('./routes/user');
 
 app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);
 app.use('/leader', leaderRouter);
+app.use('/user', userRouter);
 
 app.listen(3000, () => {
     console.log('listening on port 3000');
