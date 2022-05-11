@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const checkLogin = (req, res, next) =>{
     const  {authorization} = req.headers;
     try{
@@ -9,8 +10,8 @@ const checkLogin = (req, res, next) =>{
         req.userId = userId;
         next();
     }
-    catch(err){
-        next(err);
+    catch{
+        next("You are not a admin!");
     }
 }
 

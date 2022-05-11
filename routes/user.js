@@ -19,12 +19,12 @@ router.post('/signup', async (req, res) => {
 
         await newUser.save();
         res.status(200).send({
-            success: "user inserted!"
+            "message": "User created successfully!"
         })
     }
     catch {
         res.status(500).json({
-            error: "There was a error!"
+            "error" : "Internal server error!"
         })
     }
 

@@ -4,7 +4,7 @@ const Dish = require('../model/dishSchema');
 const verifyToken = require('./verityToken');
 
 // get dishes 
-router.get('/', verifyToken, async (req, res) =>{
+router.get('/', async (req, res) =>{
     try{
         const dishes = await Dish.find();
         res.json(dishes);
@@ -30,7 +30,7 @@ router.get(('/:dishId'), async (req, res)=>{
 
 
 // post dish 
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     const dishData = new Dish({
         name: req.body.name,
         price: req.body.price,
@@ -41,17 +41,17 @@ router.post('/', async (req, res) => {
         const postDishes = await dishData.save();
         res.json(postDishes);
         console.log(res.statusCode);
-        res.redirect('/');
+        //res.redirect('/');
     }
     catch(err){
         res.send(err.message);
-        res.redirect('/');
-        console.log(res.statusCode);
+        //res.redirect('/');
+        //console.log(res.statusCode);
     }
 })
 
 // delete dish
-router.delete(('/:dishId'), async (req, res)=>{
+router.delete(('/:dishId'), verifyToken, async (req, res)=>{
     try{
         const deleteDish = await Dish.findByIdAndDelete(req.params.dishId);
         res.send("Dish deleted....");
@@ -62,7 +62,7 @@ router.delete(('/:dishId'), async (req, res)=>{
 })
 
 // update or put dish by dish id 
-router.put('/:dishId', async (req, res)=>{
+router.put('/:dishId', verifyToken, async (req, res)=>{
     try{
         const dish = await Dish.findById(req.params.dishId);
         dish.name = req.body.name;
