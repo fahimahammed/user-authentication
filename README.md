@@ -46,3 +46,23 @@ An Admin (who must be first checked to make sure is an ordinary user), can perfo
 
 A GET operation on `http://localhost:3000/users` by an Admin will return the details of the registered users
 An ordinary user (without Admin privileges) cannot perform the GET operation on `http://localhost:3000/users`.
+
+### Installation
+
+Install my-project with npm
+
+```bash
+  git clone https://github.com/fahimahammed/user-authentication.git
+  cd user-authentication
+  npm start
+```
+
+### Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`ACCESS_TOKEN`
+
+
+
+- [@fahimahammed](https://www.github.com/fahimahammed)
