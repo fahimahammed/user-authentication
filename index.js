@@ -9,6 +9,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const port = process.env.PORT || 3000;
+
 
 mongoose.connect("mongodb://localhost/assignment", {
   useNewUrlParser: true,
@@ -33,6 +35,6 @@ app.use('/promotions', promoRouter);
 app.use('/leader', leaderRouter);
 app.use('/user', userRouter);
 
-app.listen(3000, () => {
-    console.log('listening on port 3000');
+app.listen(port, () => {
+    console.log(`listening on port ${port}`);
 })
