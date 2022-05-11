@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Dish = require('../model/dishSchema');
+const verifyToken = require('./verityToken');
 
 // get dishes 
-router.get('/', async (req, res) =>{
+router.get('/', verifyToken, async (req, res) =>{
     try{
         const dishes = await Dish.find();
         res.json(dishes);
@@ -16,6 +17,7 @@ router.get('/', async (req, res) =>{
 
 // get dishes by dish id
 router.get(('/:dishId'), async (req, res)=>{
+    console.log(req.email);
     try{
         const dish = await Dish.findById(req.params.dishId);
         res.json(dish);
