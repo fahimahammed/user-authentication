@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Leader = require('../model/leaderSchema');
+const verifyToken = require('./verityToken');
 
 
 // get all leader data 
@@ -29,7 +30,7 @@ router.get(('/:leaderId'), async (req, res)=>{
 })
 
 // post data
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     const leaderData = new Leader({
         name: req.body.name,
         designation: req.body.designation,
@@ -49,7 +50,7 @@ router.post('/', async (req, res) => {
 
 
 
-router.delete(('/:leaderId'), async (req, res)=>{
+router.delete(('/:leaderId'), verifyToken, async (req, res)=>{
     try{
         const deleteLeader = await Leader.findByIdAndDelete(req.params.leaderId);
         res.send("Leader deleted....");
@@ -60,7 +61,7 @@ router.delete(('/:leaderId'), async (req, res)=>{
 })
 
 
-router.put('/:leaderId', async (req, res)=>{
+router.put('/:leaderId', verifyToken, async (req, res)=>{
     try{
         const leader = await Leader.findById(req.params.leaderId);
         leader.name = req.body.name;
